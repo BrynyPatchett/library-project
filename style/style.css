@@ -1,0 +1,64 @@
+html,body{
+    font-size: 16px;
+    background-color: lightblue;
+    margin: 0;
+    height: 100%;
+}
+
+.container{
+    height: 100%; 
+    background-color: lightblue;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.sidebar{
+    background-color: lightgray;
+}
+
+.content{
+    margin: 40px;
+    background-color: cadetblue;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    /*Sets first row to be the min content , allows card to be positioned without growing to end of container*/
+     grid-template-rows: min-content;
+     /*then splits every row up evenly so all the rows are then thr same size*/
+     grid-auto-rows: 1fr;
+    gap:20px;
+    padding: 20px;
+}
+
+
+.placeholdercard{
+    display: grid; 
+     align-content: space-between;
+    background-color: rgb(175, 184, 185);
+    overflow: hidden;
+    grid-template-rows: 1fr auto;
+    border-radius: 5px;
+    box-shadow: 3px 5px 10px black;
+}
+
+.pagesread{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    justify-self: flex-end;
+}
+
+
+.titleauthor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    >h1{
+        margin: 0;
+        font-size: 2rem;;
+    }
+    >h2{
+    font-size: 1.4rem;;
+    margin: 0;
+    }
+}
