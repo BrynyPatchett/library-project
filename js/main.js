@@ -90,7 +90,7 @@ library.push(firstBook);
 library.push(secondBook);
 library.push(secondBook);
 library.push(firstBook);
-// library.push(new Book("The Lord of thasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasasdasdasdasdasdasdasasasde rings", "J.R.R Tolkien", 300, false, 023));
+ library.push(new Book("The Lord of thasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasasdasdasdasdasdasdasasasde rings", "J.R.R Tolkien", 300, false, 2));
 
 displayLibrary();
 // displayLibrary();

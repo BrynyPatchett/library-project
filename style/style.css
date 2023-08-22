@@ -21,10 +21,9 @@ html,body{
     background-color: cadetblue;
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
-    /*Sets first row to be the min content , allows card to be positioned without growing to end of container*/
-     grid-template-rows: min-content;
-     /*then splits every row up evenly so all the rows are then thr same size*/
-     grid-auto-rows: 1fr;
+    
+    grid-auto-rows:min-content;
+
     gap:20px;
     padding: 20px;
 }
