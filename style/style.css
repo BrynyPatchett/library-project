@@ -13,7 +13,14 @@ html,body{
 }
 
 .sidebar{
+    padding: 40px;
     background-color: lightgray;
+    display: grid;
+    grid-template-rows: auto 3fr 1fr;
+    justify-content: center;
+    gap:20px;
+    text-align: center;
+
 }
 
 .content{
@@ -33,10 +40,12 @@ html,body{
     display: grid; 
      align-content: space-between;
     background-color: rgb(175, 184, 185);
-    overflow: hidden;
+    word-wrap: break-word;
     grid-template-rows: 1fr auto;
     border-radius: 5px;
     box-shadow: 3px 5px 10px black;
+    padding: 20px;
+    /* max-height: 200px; */
 }
 
 .pagesread{
@@ -54,10 +63,42 @@ html,body{
     text-align: center;
     >h1{
         margin: 0;
-        font-size: 2rem;;
+        font-size: 2.0rem;
+        max-width: 10ch;
+
     }
     >h2{
     font-size: 1.4rem;;
     margin: 0;
     }
+}
+
+.inputfield{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    width: 80%;
+    border-radius: 5px;
+}
+
+.cardcontrol{
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    >img{
+        height: 40px;
+        cursor: pointer;
+        
+    }
+    >img:hover{
+        background-color: rgb(219, 219, 219);
+    }
+}
+
+#beenread{
+    padding: 0;
+    width: 10ch;
 }

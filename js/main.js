@@ -1,8 +1,38 @@
-console.log("Hello World");
 
 const library = [];
 
 const libraryDisplay = document.querySelector(".content");
+const form = document.querySelector("form");
+const titleField = document.querySelector("#title");
+const authorField = document.querySelector("#author");
+const pagesField = document.querySelector("#pages");
+const readCheck = document.querySelector("#read");
+//Allows the running of default validation, but stops from submitting the page
+form.addEventListener("submit",addBook,false)
+function addBook(event){
+    event.preventDefault();
+    let title = titleField.value;
+    console.log(title);
+
+    let author = authorField.value;
+    console.log(author);
+
+    let pages = pagesField.value;
+    console.log(pages);
+
+
+    let read = readCheck.checked;
+    console.log(read);
+
+    addBookToLibrary(title,author,pages,read,library.length);
+    form.reset();
+
+   
+
+}
+
+
+
 
 
 function Book(name, author, pages, read,id) {
@@ -22,13 +52,13 @@ function Book(name, author, pages, read,id) {
 
 
 
-function addBookToLibrary(name, author, pages, read) {
+function addBookToLibrary(name, author, pages, read,id) {
     //get form data
-    let newBook = new Book(name, author, pages, read,library.length);
+    let newBook = new Book(name, author, pages, read,id);
     //create book
     library.push(newBook);
     //add book to array
-    displayBook();
+    displayBook(newBook);
 
 }
 
@@ -39,11 +69,26 @@ function addBookToLibrary(name, author, pages, read) {
 function displayBook(newBook) {
 
     let newBookDisplay = document.createElement('div');
+
     newBookDisplay.className = "placeholdercard";
     newBookDisplay.dataset.id = newBook.bookid;
 
     let titleauthor = document.createElement('div');
     titleauthor.className = "titleauthor";
+
+    let cardcontrol = document.createElement('div');
+    cardcontrol.className = "cardcontrol";
+
+    let deleteIcon = document.createElement('img');
+    let readIcon = document.createElement('img');
+
+
+    deleteIcon.setAttribute("src","./images/delete.svg") ;
+    readIcon.setAttribute("src","./images/readtick.svg") ;
+
+    deleteIcon.setAttribute("alt","deleteBook") ;
+    readIcon.setAttribute("alt","toggleReadBook") ;
+
 
     let title = document.createElement('h1');
     title.textContent = newBook.name;
@@ -55,10 +100,11 @@ function displayBook(newBook) {
     pagesread.className = "pagesread";
 
     let pages = document.createElement('h3');
-    pages.textContent = newBook.pages;
+    pages.textContent = "Pages: " + newBook.pages;
 
     let read = document.createElement('h3');
-    read.textContent = newBook.read;
+    read.textContent = "Read: " + newBook.read;
+    read.id = "beenread";
 
     pagesread.appendChild(pages);
     pagesread.appendChild(read);
@@ -66,10 +112,37 @@ function displayBook(newBook) {
     titleauthor.appendChild(title);
     titleauthor.appendChild(author);
 
+    cardcontrol.appendChild(deleteIcon);
+    cardcontrol.appendChild(readIcon);
+
+    readIcon.addEventListener("click", (e) =>{
+        let bookElement = e.target.parentElement.parentElement;
+        let updateIndex = bookElement.dataset.id;
+        library[updateIndex].toggleRead();
+        let updateRead = bookElement.querySelector("#beenread")
+        updateRead.textContent =  "Read: " + library[updateIndex].read;
+    });
+
+
+    deleteIcon.addEventListener("click",(e) => {
+        //get the card the represents the book
+        console.log(e.target.parentElement.parentElement);
+        let bookElement = e.target.parentElement.parentElement;
+        let deleteIndex = bookElement.dataset.id;
+        console.log(deleteIndex);
+        library.splice(deleteIndex,1)
+        //remove self from dom
+        bookElement.parentElement.removeChild(bookElement);
+
+    });
+
     newBookDisplay.appendChild(titleauthor);
     newBookDisplay.appendChild(pagesread);
+    newBookDisplay.appendChild(cardcontrol);
 
     libraryDisplay.appendChild(newBookDisplay);
+
+
 
 }
 
@@ -84,21 +157,9 @@ let firstBook = new Book("The Lord of the rings", "J.R.R Tolkien", 300, false, 0
 let secondBook = new Book("The Hobbit", "J.R.R Tolkien", 248, true,1);
 
 
-
-
 library.push(firstBook);
 library.push(secondBook);
-library.push(secondBook);
-library.push(firstBook);
- library.push(new Book("The Lord of thasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasasdasdasdasdasdasdasasasde rings", "J.R.R Tolkien", 300, false, 2));
+
 
 displayLibrary();
-// displayLibrary();
-
-// displayLibrary();
-// displayLibrary();
-// displayLibrary();
-// displayLibrary();
-// displayLibrary();
-// displayLibrary();
 
