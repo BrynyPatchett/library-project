@@ -84,7 +84,17 @@ function displayBook(newBook) {
 
 
     deleteIcon.setAttribute("src","./images/delete.svg") ;
-    readIcon.setAttribute("src","./images/readtick.svg") ;
+
+    let icon = "./images/readcross.svg";;
+    if(!newBook.read){
+        icon = "./images/readtick.svg";
+        readIcon.classList.add("notread");
+    }
+    readIcon.setAttribute("src",icon) ;
+
+
+    readIcon.classList.add("readIcon");
+    deleteIcon.classList.add("deleteIcon");
 
     deleteIcon.setAttribute("alt","deleteBook") ;
     readIcon.setAttribute("alt","toggleReadBook") ;
@@ -121,6 +131,17 @@ function displayBook(newBook) {
         library[updateIndex].toggleRead();
         let updateRead = bookElement.querySelector("#beenread")
         updateRead.textContent =  "Read: " + library[updateIndex].read;
+
+        let imageSrc ="./images/readtick.svg";
+        if(library[updateIndex].read){
+            imageSrc = "./images/readcross.svg";
+            e.target.classList.remove("notread");
+        }else{
+            e.target.classList.add("notread");
+        }
+        console.log( e.target);
+        e.target.src = imageSrc;
+        
     });
 
 
@@ -139,7 +160,6 @@ function displayBook(newBook) {
     newBookDisplay.appendChild(titleauthor);
     newBookDisplay.appendChild(pagesread);
     newBookDisplay.appendChild(cardcontrol);
-
     libraryDisplay.appendChild(newBookDisplay);
 
 
@@ -153,13 +173,7 @@ function displayLibrary() {
     }
 }
 
-let firstBook = new Book("The Lord of the rings", "J.R.R Tolkien", 300, false, 0);
-let secondBook = new Book("The Hobbit", "J.R.R Tolkien", 248, true,1);
-
-
-library.push(firstBook);
-library.push(secondBook);
-
 
 displayLibrary();
+
 
