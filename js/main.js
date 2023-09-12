@@ -27,7 +27,6 @@ function addBook(event){
     addBookToLibrary(title,author,pages,read,library.length);
     form.reset();
 
-   
 
 }
 
@@ -35,18 +34,24 @@ function addBook(event){
 
 
 
-function Book(name, author, pages, read,id) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.bookid = id;
-    this.info = function () {
+class Book {
+
+    constructor(name, author, pages, read,id){
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.bookid = id;
+    };
+    get info() {
         console.log(`${this.name}, ${this.author}, ${this.pages}, ${this.read ? "Has been read" : "Yet to read"}`)
-    }
-    this.toggleRead = function () {
-        this.read = !this.read;
-    }
+    };
+    set read(value){
+        this._read = value;
+    };
+    get read(){
+        return this._read;
+    };
 
 }
 
@@ -128,7 +133,7 @@ function displayBook(newBook) {
     readIcon.addEventListener("click", (e) =>{
         let bookElement = e.target.parentElement.parentElement;
         let updateIndex = bookElement.dataset.id;
-        library[updateIndex].toggleRead();
+        library[updateIndex].read = !library[updateIndex].read ;
         let updateRead = bookElement.querySelector("#beenread")
         updateRead.textContent =  "Read: " + library[updateIndex].read;
 
