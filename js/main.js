@@ -4,32 +4,74 @@ const library = [];
 const libraryDisplay = document.querySelector(".content");
 const form = document.querySelector("form");
 const titleField = document.querySelector("#title");
+titleField.required = true;
 const authorField = document.querySelector("#author");
+authorField.required = true;
 const pagesField = document.querySelector("#pages");
+pagesField.required = true;
 const readCheck = document.querySelector("#read");
+
+window.onload = () => {
+    titleField.oninput = validateTitle;
+    authorField.oninput = validateAuthor;
+    pagesField.oninput = validatePages;
+    titleField.onload = validateTitle;
+}
+
+
+
+
 //Allows the running of default validation, but stops from submitting the page
 form.addEventListener("submit",addBook,false)
 function addBook(event){
-    event.preventDefault();
+ event.preventDefault();
     let title = titleField.value;
-    console.log(title);
-
     let author = authorField.value;
-    console.log(author);
-
     let pages = pagesField.value;
-    console.log(pages);
-
 
     let read = readCheck.checked;
-    console.log(read);
-
     addBookToLibrary(title,author,pages,read,library.length);
     form.reset();
-
+    
 
 }
 
+
+function validateTitle(){
+    let title = titleField.value;
+    if(title.length <= 0){
+        titleField.setCustomValidity("Please provide a book title.");
+        return false;
+    }else{
+        titleField.setCustomValidity("");
+    }
+    return true;
+}
+
+
+
+function validateAuthor(){
+    let author = authorField.value;
+    if(author.length <= 0){
+        authorField.setCustomValidity("Please provide a name for the author.");
+        return false;
+    }else{
+        authorField.setCustomValidity("");
+    }
+    return true;
+}
+
+
+function validatePages(){
+    let pages = pagesField.value;
+    if(isNaN(pages) || pages <= 0){
+        pagesField.setCustomValidity("Please enter the number of pages for this book.");
+        return false;
+    }else{
+        pagesField.setCustomValidity("");
+    }
+    return true;
+}
 
 
 
